@@ -688,7 +688,6 @@ line breaks.</pre>
 
 "a" Tag: do ancoring or linking
 
-![1761995825448](image/03-Elements/1761995825448.png)
 
 ```
 <!-- Basic hyperlink -->
@@ -725,7 +724,6 @@ line breaks.</pre>
 
 ```
 
-![1761996293809](image/03-Elements/1761996293809.png)
 
 "address" Tag: mention address
 
@@ -754,8 +752,6 @@ line breaks.</pre>
 
 ```
 
-![1761996442319](image/03-Elements/1761996442319.png)
-
 "area" Tag: do image maping
 
 ```
@@ -773,8 +769,6 @@ line breaks.</pre>
 
 
 
-![1762000301221](image/03-Elements/1762000301221.png)
-
 article: mentioning that it's an article
 
 ```
@@ -784,8 +778,6 @@ article: mentioning that it's an article
 </article>
 
 ```
-
-![1762000540097](image/03-Elements/1762000540097.png)
 
 
 
@@ -802,8 +794,6 @@ aside: side notes
 ```
 
 
-![1762000636178](image/03-Elements/1762000636178.png)
-
 audio:
 
 ```
@@ -813,8 +803,6 @@ audio:
 </audio>
 
 ```
-
-![1762000724301](image/03-Elements/1762000724301.png)
 
 b: bold
 
