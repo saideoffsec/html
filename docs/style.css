@@ -1,58 +1,235 @@
-* {
+/* ==========================================================================
+   Live HTML Editor (VSCode-like)
+   Organized stylesheet
+   --------------------------------------------------------------------------
+   Sections:
+   1) CSS Reset
+   2) Design Tokens (CSS Variables)
+   3) Base Elements (html, body, typography)
+   4) Layout (topbar, container grid)
+   5) Components (panes, editor, preview, explainer)
+   6) Utilities
+   7) Responsive
+   ========================================================================== */
+
+/* 1) CSS Reset ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background-color: #f0f0f0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+html, body {
+  height: 100%;
 }
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote,
+dl, dd {
+  margin: 0;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 2) Design Tokens -------------------------------------------------------- */
+:root {
+  /* Colors (Dark theme) */
+  --bg: #1e1e1e;
+  --panel: #252526;
+  --border: #333;
+  --text: #ddd;
+  --muted: #aaa;
+  --head: #2d2d2d;
+  --accent: #0e639c;
+
+  /* Effects */
+  --radius: 6px;
+  --shadow-elev-1: 0 0 20px rgba(0, 0, 0, 0.25);
+
+  /* Sizing */
+  --gutter: 10px;
+
+  /* Typography */
+  --font-ui: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+             'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans';
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               'Liberation Mono', 'Courier New', monospace;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --line: 1.5;
+}
+
+/* 3) Base Elements -------------------------------------------------------- */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--line);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+/* 4) Layout --------------------------------------------------------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--head);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  font-size: var(--text-sm);
+}
+
+.brand .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.brand .dot.red   { background: #ff5f56; }
+.brand .dot.amber { background: #ffbd2e; }
+.brand .dot.green { background: #27c93f; }
 
 .container {
-  display: flex;
-  width: 90%;
-  height: 90vh;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  padding: var(--gutter);
+  height: 55vh;
 }
 
-.editor, .preview {
+/* 5) Components ----------------------------------------------------------- */
+/* Panes */
+.pane {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-shadow: var(--shadow-elev-1);
+}
+
+.pane-head {
+  padding: 8px 10px;
+  background: var(--head);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+/* Editor / Preview containers */
+#editor {
   flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0; /* important for proper flex overflow */
+  border: none;
+}
+
+#preview {
+  flex: 1;
+  border: 0;
+  min-height: 0;
+  width: 100%;
+  background: #fff;
+}
+
+.preview-pane,
+.editor-pane {
   display: flex;
   flex-direction: column;
 }
 
-h2 {
-  background-color: #333;
-  color: white;
+/* Explainer */
+.explainer {
+  margin: 0 var(--gutter) 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-elev-1);
+}
+
+.ex-body { padding: 10px 12px; }
+
+.tag-line {
+  margin-bottom: 8px;
+  font-size: var(--text-sm);
+}
+
+.label {
+  color: var(--muted);
+  margin-right: 6px;
+}
+
+.desc {
+  color: #e6e6e6;
+  margin-bottom: 10px;
+  line-height: var(--line);
+}
+
+.example {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  align-items: stretch;
+}
+
+.example-head {
+  grid-column: 1 / -1;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: -4px;
+}
+
+.codeblock {
+  background: #111;
+  color: #dcdcdc;
   padding: 10px;
-  text-align: center;
-  font-size: 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid #000;
+  overflow: auto;
+  max-height: 220px;
 }
 
-textarea {
-  flex: 1;
-  border: none;
-  padding: 10px;
-  font-size: 1rem;
-  font-family: monospace;
-  resize: none;
-  outline: none;
+#ex-preview {
+  width: 100%;
+  height: 220px;
+  border: 0;
+  background: #fff;
+  border-radius: var(--radius);
 }
 
-iframe {
-  flex: 1;
-  border: none;
-  background-color: white;
-}
+/* 6) Utilities ------------------------------------------------------------ */
+/* (Add utility classes here when/if needed) */
 
-.editor {
-  border-right: 2px solid #ccc;
+/* 7) Responsive ----------------------------------------------------------- */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    height: 50vh;
+  }
+  .example {
+    grid-template-columns: 1fr;
+  }
 }

@@ -3,21 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live HTML Editor</title>
+  <title>Live HTML Editor — VSCode-like</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Monaco Editor -->
+  <script>window.MonacoEnvironment = { getWorkerUrl: function(moduleId, label) { return 'data:text/javascript;charset=utf-8,' + encodeURIComponent(`
+    self.MonacoEnvironment = { baseUrl: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/' };
+    importScripts('https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/base/worker/workerMain.js');`); }};</script>
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.min.js"></script>
 </head>
 <body>
+  <div class="topbar">
+    <div class="brand"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span> Live HTML Editor</div>
+    <div class="status" id="status">Ready</div>
+  </div>
   <div class="container">
-    <div class="editor">
-      <h2>HTML Editor</h2>
-      <textarea id="htmlInput" placeholder="Type your HTML code here..."></textarea>
+    <div class="pane editor-pane">
+      <div class="pane-head">Editor</div>
+      <div id="editor" aria-label="HTML Editor (VSCode-like)"></div>
     </div>
-    <div class="preview">
-      <h2>Live Preview</h2>
-      <iframe id="outputFrame"></iframe>
+    <div class="pane preview-pane">
+      <div class="pane-head">Preview</div>
+      <iframe id="preview" title="Live Preview" sandbox="allow-same-origin allow-scripts"></iframe>
     </div>
   </div>
-  
+  <div class="explainer">
+    <div class="pane-head">HTML Tag Explainer</div>
+    <div class="ex-body">
+      <div class="tag-line"><span class="label">Tag:</span> <code id="ex-tag">—</code></div>
+      <div class="desc" id="ex-desc">Start typing a tag like &lt;section&gt; or place the caret inside a tag to see details.</div>
+      <div class="example">
+        <div class="example-head">Example</div>
+        <pre id="ex-code" class="codeblock"></pre>
+        <iframe id="ex-preview" title="Example Preview" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
