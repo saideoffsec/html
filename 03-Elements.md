@@ -682,8 +682,6 @@ line breaks.</pre>
 
 ```
 
-![1761992479254](image/03-Elements/1761992479254.png)
-
 ## All HTML 5 Tags With Example
 
 "a" Tag: do ancoring or linking
